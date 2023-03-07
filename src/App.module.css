@@ -8,3 +8,10 @@
   justify-content: flex-end;
   gap: 1rem;
 }
+
+.active {
+  background: black;
+  color: white;
+  font-weight: bold;
+  padding: 10px;
+}
