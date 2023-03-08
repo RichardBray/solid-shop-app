@@ -8,7 +8,6 @@ export default function App() {
     alert(text)
   }
 
-  // () => showAlert('test')
   return (
     <div class={styles.header}>
       <nav class={styles.navigation}>
@@ -19,7 +18,7 @@ export default function App() {
       <header>
         <h1>Solid Shop</h1>
         <HomePage totalItems={340} />
-        <button onClick={[showAlert, 'hello']}>view</button>
+        <button onClick={() => showAlert('hello')}>view</button>
       </header>
     </div>
   );
