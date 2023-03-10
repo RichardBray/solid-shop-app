@@ -1,6 +1,6 @@
 import HomePage from './HomePage';
 import styles from './App.module.css';
-import { createEffect, createSignal } from 'solid-js';
+import { createEffect, createSignal, on } from 'solid-js';
 
 export default function App() {
   const onHomePage = true;
@@ -12,11 +12,15 @@ export default function App() {
     setBought(!bought());
   }
 
-  createEffect((prev) => {
-    const logText = bought() ? 'An item has been bought' : 'No items in the basket';
-    if (prev !== 'initialRun') console.log(logText);
-
-  }, 'initialRun');
+  createEffect<void>(
+    on(
+      bought, () => {
+        const logText = bought() ? 'An item has been bought' : 'No items in the basket';
+        console.log(logText);
+      },
+      { defer: true }
+    )
+  );
 
   return (
     <div class={styles.header}>
