@@ -1,6 +1,6 @@
 import HomePage from './HomePage';
 import styles from './App.module.css';
-import { createEffect, createSignal, on } from 'solid-js';
+import { createEffect, createSignal, on, createMemo } from 'solid-js';
 
 export default function App() {
   const onHomePage = true;
@@ -12,11 +12,12 @@ export default function App() {
     setBought(!bought());
   }
 
-  createEffect<void>(
+  const notification = createMemo(
     on(
-      bought, () => {
-        const logText = bought() ? 'An item has been bought' : 'No items in the basket';
-        console.log(logText);
+      bought, (prev) => {
+        const message = bought() ? 'An item has been bought' : 'No items in the basket';
+        console.log(prev)
+        return message;
       },
       { defer: true }
     )
@@ -34,6 +35,7 @@ export default function App() {
       <header>
         <h1>Solid Shop</h1>
         <HomePage totalItems={340} />
+        <p>{notification()}</p>
         <button onClick={toggleBought}>{getButtonText()}</button>
       </header>
     </div>
