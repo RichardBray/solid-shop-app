@@ -12,10 +12,11 @@ export default function App() {
     setBought(!bought());
   }
 
-  createEffect(() => {
+  createEffect((prev) => {
     const logText = bought() ? 'An item has been bought' : 'No items in the basket';
-    console.log(logText);
-  });
+    if (prev !== 'initialRun') console.log(logText);
+
+  }, 'initialRun');
 
   return (
     <div class={styles.header}>
