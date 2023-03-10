@@ -1,16 +1,21 @@
 import HomePage from './HomePage';
 import styles from './App.module.css';
-import { createSignal } from 'solid-js';
+import { createEffect, createSignal } from 'solid-js';
 
 export default function App() {
   const onHomePage = true;
   const [bought, setBought] = createSignal(false);
 
-  const getButtonText = () => bought() ? 'Remove' : 'Buy';
+  const getButtonText = () => (bought() ? 'Remove' : 'Buy');
 
   function toggleBought() {
     setBought(!bought());
   }
+
+  createEffect(() => {
+    const logText = bought() ? 'An item has been bought' : 'No items in the basket';
+    console.log(logText);
+  });
 
   return (
     <div class={styles.header}>
@@ -24,7 +29,7 @@ export default function App() {
       <header>
         <h1>Solid Shop</h1>
         <HomePage totalItems={340} />
-        <button onClick={toggleBought}>{getButtonText}</button>
+        <button onClick={toggleBought}>{getButtonText()}</button>
       </header>
     </div>
   );
