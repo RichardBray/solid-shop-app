@@ -1,0 +1,88 @@
+{
+  "items": [
+    {
+      "name": "Blue T-Shirt",
+      "price": 19.99,
+      "description": "A classic blue t-shirt made from soft cotton.",
+      "image_url": "https://example.com/blue-t-shirt.jpg"
+    },
+    {
+      "name": "Red Hoodie",
+      "price": 39.99,
+      "description": "Stay warm and stylish with this red hoodie.",
+      "image_url": "https://example.com/red-hoodie.jpg"
+    },
+    {
+      "name": "Black Jeans",
+      "price": 59.99,
+      "description": "These black jeans are perfect for any occasion.",
+      "image_url": "https://example.com/black-jeans.jpg"
+    },
+    {
+      "name": "White Sneakers",
+      "price": 79.99,
+      "description": "These comfortable white sneakers are perfect for everyday wear.",
+      "image_url": "https://example.com/white-sneakers.jpg"
+    },
+    {
+      "name": "Leather Jacket",
+      "price": 129.99,
+      "description": "This classic leather jacket will never go out of style.",
+      "image_url": "https://example.com/leather-jacket.jpg"
+    },
+    {
+      "name": "Striped Shirt",
+      "price": 24.99,
+      "description": "Add a pop of color to your wardrobe with this striped shirt.",
+      "image_url": "https://example.com/striped-shirt.jpg"
+    },
+    {
+      "name": "Brown Boots",
+      "price": 89.99,
+      "description": "Stay stylish and comfortable in these brown boots.",
+      "image_url": "https://example.com/brown-boots.jpg"
+    },
+    {
+      "name": "Printed Dress",
+      "price": 69.99,
+      "description": "Make a statement with this bold printed dress.",
+      "image_url": "https://example.com/printed-dress.jpg"
+    },
+    {
+      "name": "Denim Shorts",
+      "price": 34.99,
+      "description": "These denim shorts are perfect for summer.",
+      "image_url": "https://example.com/denim-shorts.jpg"
+    },
+    {
+      "name": "Green Jacket",
+      "price": 89.99,
+      "description": "Stay warm and stylish in this green jacket.",
+      "image_url": "https://example.com/green-jacket.jpg"
+    },
+    {
+      "name": "Black Dress",
+      "price": 79.99,
+      "description": "This little black dress is a wardrobe staple.",
+      "image_url": "https://example.com/black-dress.jpg"
+    },
+    {
+      "name": "Gray Sweatshirt",
+      "price": 29.99,
+      "description": "Stay comfortable and cozy in this gray sweatshirt.",
+      "image_url": "https://example.com/gray-sweatshirt.jpg"
+    },
+    {
+      "name": "Pink Skirt",
+      "price": 49.99,
+      "description": "Add a touch of femininity to your wardrobe with this pink skirt.",
+      "image_url": "https://example.com/pink-skirt.jpg"
+    },
+    {
+      "name": "Blue Shorts",
+      "price": 24.99,
+      "description": "These blue shorts are perfect for a casual day out.",
+      "image_url": "https://example.com/blue-shorts.jpg"
+    }
+  ]
+}
