@@ -2,7 +2,14 @@ import HomePage from './HomePage';
 import styles from './App.module.css';
 import { createResource, createSignal, on, createMemo } from 'solid-js';
 
-async function fetcjData(id: number) {
+interface ShopItem {
+  name: string,
+  price: number,
+  description: string,
+  image_url: string
+}
+
+async function fetchData(id: number) {
   const data = await fetch('src/api/data.json');
   const json = await data.json();
   return json.items[id];
@@ -11,20 +18,20 @@ async function fetcjData(id: number) {
 export default function App() {
   const onHomePage = true;
   const [bought, setBought] = createSignal(false);
-  const [item, { mutate, refetch }] = createResource(9, fetcjData);
+  const [item, { mutate, refetch }] = createResource<Partial<ShopItem>, number>(9, fetchData);
 
   const getButtonText = () => (bought() ? 'Remove' : 'Buy');
 
   function toggleBought() {
     setBought(!bought());
-    mutate((prevData) => ({...prevData, ...{msg: 'lol'}}));
+    mutate((prevData) => ({...prevData, msg: 'lol'}));
     refetch();
   }
 
   const notification = createMemo(
     on(
       bought,
-      (prev) => {
+      () => {
         const message = bought() ? 'An item has been bought' : 'No items in the basket';
         return message;
       },
