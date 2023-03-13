@@ -1,31 +1,29 @@
 import HomePage from './HomePage';
 import styles from './App.module.css';
-import { createResource, createSignal, on, createMemo } from 'solid-js';
+import { createResource, createSignal, on, createMemo, For } from 'solid-js';
 
 interface ShopItem {
-  name: string,
-  price: number,
-  description: string,
-  image_url: string
+  name: string;
+  price: number;
+  description: string;
+  image_url: string;
 }
 
-async function fetchData(id: number) {
+async function fetchData() {
   const data = await fetch('src/api/data.json');
   const json = await data.json();
-  return json.items[id];
+  return json.items;
 }
 
 export default function App() {
   const onHomePage = true;
   const [bought, setBought] = createSignal(false);
-  const [item, { mutate, refetch }] = createResource<Partial<ShopItem>, number>(9, fetchData);
+  const [items] = createResource<ShopItem[]>(fetchData);
 
   const getButtonText = () => (bought() ? 'Remove' : 'Buy');
 
   function toggleBought() {
     setBought(!bought());
-    mutate((prevData) => ({...prevData, msg: 'lol'}));
-    refetch();
   }
 
   const notification = createMemo(
@@ -52,9 +50,18 @@ export default function App() {
         <h1>Solid Shop</h1>
         <HomePage totalItems={340} />
         <p>{notification()}</p>
-        <div>{JSON.stringify(item())}</div>
+        <For each={items()} fallback={<div>Loading...</div>}>
+          {(item, index) => (
+            <div>
+              {index()} {item.name}
+            </div>
+          )}
+        </For>
         <button onClick={toggleBought}>{getButtonText()}</button>
       </header>
     </div>
   );
 }
+
+
+// fallback={<div>Loading...</div>} is another prop passed to the <For> component that specifies what to render while the array is being loaded or if the array is empty. In this case, it renders a simple message saying "Loading..." using a <div> element.
