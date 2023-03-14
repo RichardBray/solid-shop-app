@@ -1,6 +1,7 @@
 import HomePage from './HomePage';
+import CheckoutPage from './CheckoutPage';
 import styles from './App.module.css';
-import { createSignal, createMemo, createResource, on } from 'solid-js';
+import { createSignal, createMemo, createResource, on, Show } from 'solid-js';
 
 export interface ShopItem {
   name: string;
@@ -15,9 +16,16 @@ async function fetchData() {
   return json.items;
 }
 
+const pageName = {
+  home: 'home',
+  checkout: 'checkout',
+  about: 'about',
+};
+
 export default function App() {
-  const onHomePage = true;
   const [bought, setBought] = createSignal(false);
+  const [page, setPage] = createSignal(pageName.home);
+
   const [items] = createResource<ShopItem[]>(fetchData);
   const getButtonText = () => (bought() ? 'Remove' : 'Buy');
   const notification = createMemo(
@@ -30,31 +38,44 @@ export default function App() {
       { defer: true }
     )
   );
-
-  function toggleBought() {
-    setBought(!bought());
-  }
-
   const homepageProps = {
     items,
     getButtonText,
-    toggleBought
+    toggleBought,
+  };
+
+  function navButtonProps(name: 'home' | 'checkout' | 'about') {
+    return {
+      onClick: () => setPage(name),
+      classList: { [styles.active]: page() === pageName[name] },
+    };
+  }
+
+  function toggleBought() {
+    setBought(!bought());
   }
 
   return (
     <div class={styles.header}>
       <header>
         <nav class={styles.navigation}>
-          <a href="#" classList={{ [styles.active]: onHomePage }}>
+          <a href="#" {...navButtonProps('home')}>
             Home
           </a>
-          <a href="#">About</a>
-          <a href="#">Checkout</a>
+          <a href="#" {...navButtonProps('checkout')}>
+            Checkout
+          </a>
+          <a href="#" {...navButtonProps('about')}>About</a>
         </nav>
         <h1>Solid Shop</h1>
       </header>
       <p>{notification()}</p>
-      <HomePage {...homepageProps} />
+      <Show when={page() === pageName.home}>
+        <HomePage {...homepageProps} />
+      </Show>
+      <Show when={page() === pageName.checkout}>
+        <CheckoutPage />
+      </Show>
     </div>
   );
 }
