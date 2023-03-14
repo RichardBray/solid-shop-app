@@ -1,8 +1,8 @@
 import HomePage from './HomePage';
 import styles from './App.module.css';
-import { createResource, createSignal, on, createMemo, For } from 'solid-js';
+import { createSignal, createMemo, createResource, on } from 'solid-js';
 
-interface ShopItem {
+export interface ShopItem {
   name: string;
   price: number;
   description: string;
@@ -19,13 +19,7 @@ export default function App() {
   const onHomePage = true;
   const [bought, setBought] = createSignal(false);
   const [items] = createResource<ShopItem[]>(fetchData);
-
   const getButtonText = () => (bought() ? 'Remove' : 'Buy');
-
-  function toggleBought() {
-    setBought(!bought());
-  }
-
   const notification = createMemo(
     on(
       bought,
@@ -37,31 +31,30 @@ export default function App() {
     )
   );
 
+  function toggleBought() {
+    setBought(!bought());
+  }
+
+  const homepageProps = {
+    items,
+    getButtonText,
+    toggleBought
+  }
+
   return (
     <div class={styles.header}>
-      <nav class={styles.navigation}>
-        <a href="#" classList={{ [styles.active]: onHomePage }}>
-          Home
-        </a>
-        <a href="#">About</a>
-        <a href="#">Checkout</a>
-      </nav>
       <header>
+        <nav class={styles.navigation}>
+          <a href="#" classList={{ [styles.active]: onHomePage }}>
+            Home
+          </a>
+          <a href="#">About</a>
+          <a href="#">Checkout</a>
+        </nav>
         <h1>Solid Shop</h1>
-        <HomePage totalItems={() => items()?.length!} />
-        <p>{notification()}</p>
-        <For each={items()} fallback={<div>Loading...</div>}>
-          {(item, index) => (
-            <div>
-              {index()} {item.name}
-            </div>
-          )}
-        </For>
-        <button onClick={toggleBought}>{getButtonText()}</button>
       </header>
+      <p>{notification()}</p>
+      <HomePage {...homepageProps} />
     </div>
   );
 }
-
-
-// fallback={<div>Loading...</div>} is another prop passed to the <For> component that specifies what to render while the array is being loaded or if the array is empty. In this case, it renders a simple message saying "Loading..." using a <div> element.
