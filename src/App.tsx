@@ -48,7 +48,7 @@ export default function App() {
       </nav>
       <header>
         <h1>Solid Shop</h1>
-        <HomePage totalItems={340} />
+        <HomePage totalItems={() => items()?.length!} />
         <p>{notification()}</p>
         <For each={items()} fallback={<div>Loading...</div>}>
           {(item, index) => (

@@ -1,5 +1,5 @@
 interface HomePageProps {
-  totalItems: number;
+  totalItems: (() => number);
 }
 
 export default function HomePage({totalItems}: HomePageProps) {
