@@ -1,7 +1,7 @@
 import HomePage from './HomePage';
 import CheckoutPage from './CheckoutPage';
 import styles from './App.module.css';
-import { createSignal, createMemo, createResource, on, Show } from 'solid-js';
+import { createSignal, createMemo, createResource, on, Switch, Match } from 'solid-js';
 
 export interface ShopItem {
   name: string;
@@ -65,15 +65,14 @@ export default function App() {
         <h1>Solid Shop</h1>
       </header>
       <p>{notification()}</p>
-      <Show when={page() === 'home'}>
-        <HomePage {...homepageProps} />
-      </Show>
-      <Show when={page() === 'checkout'}>
-        <CheckoutPage />
-      </Show>
-      <Show when={page() === 'about'} fallback={<em>Not the about page</em>}>
-        <h3>On the about page</h3>
-      </Show>
+      <Switch fallback={<div>Not Found</div>}>
+        <Match when={page() === 'home'}>
+          <HomePage {...homepageProps} />
+        </Match>
+        <Match when={page() === 'checkout'}>
+          <CheckoutPage />
+        </Match>
+      </Switch>
     </div>
   );
 }
