@@ -9,6 +9,7 @@ export interface ShopItem {
   description: string;
   image_url: string;
 }
+type PageName = 'home' | 'checkout' | 'about';
 
 async function fetchData() {
   const data = await fetch('src/api/data.json');
@@ -16,15 +17,9 @@ async function fetchData() {
   return json.items;
 }
 
-const pageName = {
-  home: 'home',
-  checkout: 'checkout',
-  about: 'about',
-};
-
 export default function App() {
   const [bought, setBought] = createSignal(false);
-  const [page, setPage] = createSignal(pageName.home);
+  const [page, setPage] = createSignal<PageName>('home');
 
   const [items] = createResource<ShopItem[]>(fetchData);
   const getButtonText = () => (bought() ? 'Remove' : 'Buy');
@@ -44,10 +39,10 @@ export default function App() {
     toggleBought,
   };
 
-  function navButtonProps(name: 'home' | 'checkout' | 'about') {
+  function navButtonProps(name: PageName) {
     return {
       onClick: () => setPage(name),
-      classList: { [styles.active]: page() === pageName[name] },
+      classList: { [styles.active]: page() === name },
     };
   }
 
@@ -70,11 +65,14 @@ export default function App() {
         <h1>Solid Shop</h1>
       </header>
       <p>{notification()}</p>
-      <Show when={page() === pageName.home}>
+      <Show when={page() === 'home'}>
         <HomePage {...homepageProps} />
       </Show>
-      <Show when={page() === pageName.checkout}>
+      <Show when={page() === 'checkout'}>
         <CheckoutPage />
+      </Show>
+      <Show when={page() === 'about'} fallback={<em>Not the about page</em>}>
+        <h3>On the about page</h3>
       </Show>
     </div>
   );
