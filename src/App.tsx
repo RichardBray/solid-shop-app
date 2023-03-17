@@ -72,6 +72,9 @@ export default function App() {
         <Match when={page() === 'checkout'}>
           <CheckoutPage />
         </Match>
+        <Match when={page() === 'about'}>
+          <h2>About Page</h2>
+        </Match>
       </Switch>
     </div>
   );
