@@ -1,6 +1,5 @@
-import { createSignal, For } from 'solid-js';
+import { createSignal, For, Show } from 'solid-js';
 import type { Resource } from 'solid-js';
-import { Portal, Show } from 'solid-js/web';
 
 import type { ShopItem } from '../App';
 import styles from './HomePage.module.css';
