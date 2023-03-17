@@ -13,7 +13,7 @@ export interface ShopItem {
 type PageName = 'home' | 'checkout' | 'about';
 
 const CheckoutPage = Solid.lazy(async () => {
-  return import('./CheckoutPage');
+  return import('./CheckoutPage/CheckoutPage');
 });
 
 async function fetchData(): Promise<ShopItem[]> {
