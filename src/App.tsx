@@ -1,7 +1,6 @@
 import HomePage from './HomePage';
-import CheckoutPage from './CheckoutPage';
 import styles from './App.module.css';
-import { createSignal, createMemo, createResource, on, Switch, Match } from 'solid-js';
+import { createSignal, createMemo, createResource, on, Switch, Match, Suspense, lazy } from 'solid-js';
 
 export interface ShopItem {
   name: string;
@@ -14,8 +13,14 @@ type PageName = 'home' | 'checkout' | 'about';
 async function fetchData() {
   const data = await fetch('src/api/data.json');
   const json = await data.json();
+  await new Promise(r => setTimeout(r, 2000))
   return json.items;
 }
+
+const CheckoutPage = lazy(async () => {
+  await new Promise(r => setTimeout(r, 1000))
+  return import("./CheckoutPage")
+});
 
 export default function App() {
   const [bought, setBought] = createSignal(false);
@@ -67,7 +72,9 @@ export default function App() {
       <p>{notification()}</p>
       <Switch fallback={<div>Not Found</div>}>
         <Match when={page() === 'home'}>
-          <HomePage {...homepageProps} />
+          <Suspense fallback={<div>Loading...</div>}>
+            <HomePage {...homepageProps} />
+          </Suspense>
         </Match>
         <Match when={page() === 'checkout'}>
           <CheckoutPage />

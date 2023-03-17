@@ -13,7 +13,7 @@ export default function HomePage({ items, getButtonText, toggleBought }: HomePag
   return (
     <div>
       <h2>You are viewing {items()?.length} Products</h2>
-      <For each={items()} fallback={<div>Loading...</div>}>
+      <For each={items()}>
         {(item, index) => (
           <div>
             {index()} {item.name}
