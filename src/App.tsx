@@ -10,17 +10,17 @@ export interface ShopItem {
 }
 type PageName = 'home' | 'checkout' | 'about';
 
-async function fetchData() {
-  const data = await fetch('src/api/data.json');
-  const json = await data.json();
-  await new Promise(r => setTimeout(r, 2000))
-  return json.items;
-}
-
 const CheckoutPage = lazy(async () => {
-  await new Promise(r => setTimeout(r, 1000))
+  await new Promise(res => setTimeout(res, 2000))
   return import("./CheckoutPage")
 });
+
+async function fetchData(): Promise<ShopItem[]> {
+  const data = await fetch('src/api/data.json');
+  const json = await data.json();
+  await new Promise(res => setTimeout(res, 2000));
+  return json.items;
+}
 
 export default function App() {
   const [bought, setBought] = createSignal(false);
@@ -72,12 +72,14 @@ export default function App() {
       <p>{notification()}</p>
       <Switch fallback={<div>Not Found</div>}>
         <Match when={page() === 'home'}>
-          <Suspense fallback={<div>Loading...</div>}>
-            <HomePage {...homepageProps} />
-          </Suspense>
+        <Suspense fallback={<div>Loading...</div>}>
+          <HomePage {...homepageProps} />
+        </Suspense>
         </Match>
         <Match when={page() === 'checkout'}>
-          <CheckoutPage />
+          <Suspense fallback={<p>Loading...</p>}>
+            <CheckoutPage />
+          </Suspense>
         </Match>
         <Match when={page() === 'about'}>
           <h2>About Page</h2>
