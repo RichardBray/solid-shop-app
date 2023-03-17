@@ -1,6 +1,8 @@
-import HomePage from './HomePage';
+import HomePage from './HomePage/HomePage';
 import styles from './App.module.css';
-import { createSignal, createMemo, createResource, on, Switch, Match, Suspense, lazy } from 'solid-js';
+import * as Solid from 'solid-js';
+
+const { Switch, Match, Suspense } = Solid;
 
 export interface ShopItem {
   name: string;
@@ -10,26 +12,24 @@ export interface ShopItem {
 }
 type PageName = 'home' | 'checkout' | 'about';
 
-const CheckoutPage = lazy(async () => {
-  await new Promise(res => setTimeout(res, 2000))
-  return import("./CheckoutPage")
+const CheckoutPage = Solid.lazy(async () => {
+  return import('./CheckoutPage');
 });
 
 async function fetchData(): Promise<ShopItem[]> {
   const data = await fetch('src/api/data.json');
   const json = await data.json();
-  await new Promise(res => setTimeout(res, 2000));
   return json.items;
 }
 
 export default function App() {
-  const [bought, setBought] = createSignal(false);
-  const [page, setPage] = createSignal<PageName>('home');
+  const [bought, setBought] = Solid.createSignal(false);
+  const [page, setPage] = Solid.createSignal<PageName>('home');
 
-  const [items] = createResource<ShopItem[]>(fetchData);
+  const [items] = Solid.createResource<ShopItem[]>(fetchData);
   const getButtonText = () => (bought() ? 'Remove' : 'Buy');
-  const notification = createMemo(
-    on(
+  const notification = Solid.createMemo(
+    Solid.on(
       bought,
       () => {
         const message = bought() ? 'An item has been bought' : 'No items in the basket';
@@ -65,16 +65,18 @@ export default function App() {
           <a href="#" {...navButtonProps('checkout')}>
             Checkout
           </a>
-          <a href="#" {...navButtonProps('about')}>About</a>
+          <a href="#" {...navButtonProps('about')}>
+            About
+          </a>
         </nav>
         <h1>Solid Shop</h1>
       </header>
       <p>{notification()}</p>
       <Switch fallback={<div>Not Found</div>}>
         <Match when={page() === 'home'}>
-        <Suspense fallback={<div>Loading...</div>}>
-          <HomePage {...homepageProps} />
-        </Suspense>
+          <Suspense fallback={<div>Loading...</div>}>
+            <HomePage {...homepageProps} />
+          </Suspense>
         </Match>
         <Match when={page() === 'checkout'}>
           <Suspense fallback={<p>Loading...</p>}>

@@ -4,85 +4,85 @@
       "name": "Blue T-Shirt",
       "price": 19.99,
       "description": "A classic blue t-shirt made from soft cotton.",
-      "image_url": "https://example.com/blue-t-shirt.jpg"
+      "image_url": "https://images.pexels.com/photos/11830106/pexels-photo-11830106.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
     },
     {
       "name": "Red Hoodie",
       "price": 39.99,
       "description": "Stay warm and stylish with this red hoodie.",
-      "image_url": "https://example.com/red-hoodie.jpg"
+      "image_url": "https://images.pexels.com/photos/7887199/pexels-photo-7887199.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
     },
     {
       "name": "Black Jeans",
       "price": 59.99,
       "description": "These black jeans are perfect for any occasion.",
-      "image_url": "https://example.com/black-jeans.jpg"
+      "image_url": "https://images.pexels.com/photos/3760610/pexels-photo-3760610.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
     },
     {
       "name": "White Sneakers",
       "price": 79.99,
       "description": "These comfortable white sneakers are perfect for everyday wear.",
-      "image_url": "https://example.com/white-sneakers.jpg"
+      "image_url": "https://images.pexels.com/photos/4066289/pexels-photo-4066289.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
     },
     {
       "name": "Leather Jacket",
       "price": 129.99,
       "description": "This classic leather jacket will never go out of style.",
-      "image_url": "https://example.com/leather-jacket.jpg"
+      "image_url": "https://images.pexels.com/photos/3881173/pexels-photo-3881173.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
     },
     {
       "name": "Striped Shirt",
       "price": 24.99,
       "description": "Add a pop of color to your wardrobe with this striped shirt.",
-      "image_url": "https://example.com/striped-shirt.jpg"
+      "image_url": "https://images.pexels.com/photos/10484488/pexels-photo-10484488.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
     },
     {
       "name": "Brown Boots",
       "price": 89.99,
       "description": "Stay stylish and comfortable in these brown boots.",
-      "image_url": "https://example.com/brown-boots.jpg"
+      "image_url": "https://images.pexels.com/photos/1537492/pexels-photo-1537492.jpeg?auto=compress&cs=tinysrgb&w=1600"
     },
     {
       "name": "Printed Dress",
       "price": 69.99,
       "description": "Make a statement with this bold printed dress.",
-      "image_url": "https://example.com/printed-dress.jpg"
+      "image_url": "https://images.pexels.com/photos/7782138/pexels-photo-7782138.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
     },
     {
       "name": "Denim Shorts",
       "price": 34.99,
       "description": "These denim shorts are perfect for summer.",
-      "image_url": "https://example.com/denim-shorts.jpg"
+      "image_url": "https://images.pexels.com/photos/15728343/pexels-photo-15728343.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
     },
     {
       "name": "Green Jacket",
       "price": 89.99,
       "description": "Stay warm and stylish in this green jacket.",
-      "image_url": "https://example.com/green-jacket.jpg"
+      "image_url": "https://images.pexels.com/photos/11124949/pexels-photo-11124949.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
     },
     {
       "name": "Black Dress",
       "price": 79.99,
       "description": "This little black dress is a wardrobe staple.",
-      "image_url": "https://example.com/black-dress.jpg"
+      "image_url": "https://images.pexels.com/photos/3162769/pexels-photo-3162769.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
     },
     {
       "name": "Gray Sweatshirt",
       "price": 29.99,
       "description": "Stay comfortable and cozy in this gray sweatshirt.",
-      "image_url": "https://example.com/gray-sweatshirt.jpg"
+      "image_url": "https://images.pexels.com/photos/6995704/pexels-photo-6995704.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
     },
     {
       "name": "Pink Skirt",
       "price": 49.99,
       "description": "Add a touch of femininity to your wardrobe with this pink skirt.",
-      "image_url": "https://example.com/pink-skirt.jpg"
+      "image_url": "https://images.pexels.com/photos/9725149/pexels-photo-9725149.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
     },
     {
       "name": "Blue Shorts",
       "price": 24.99,
       "description": "These blue shorts are perfect for a casual day out.",
-      "image_url": "https://example.com/blue-shorts.jpg"
+      "image_url": "https://images.pexels.com/photos/13816106/pexels-photo-13816106.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
     }
   ]
 }
