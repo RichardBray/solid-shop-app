@@ -14,20 +14,20 @@ export default function HomePage({ items, getButtonText, toggleBought }: HomePag
   return (
     <>
       <h2>Viewing {items()?.length} Products</h2>
-      <div class={styles.container}>
-      <For each={items()}>
-        {(item) => (
-          <article class={styles.item}>
-            <img src={item.image_url} />
-            <section class={styles.info}>
-              {item.name}
-              <strong>£{item.price}</strong>
-            </section>
-            <button class={styles.button} onClick={toggleBought}>{getButtonText()}</button>
-          </article>
-        )}
-      </For>
-    </div>
+      <div>
+        <For each={items()}>
+          {(item) => (
+            <article>
+              <img src={item.image_url} alt={item.name} />
+              <section>
+                {item.name}
+                <strong>£{item.price}</strong>
+              </section>
+              <button onClick={toggleBought}>{getButtonText()}</button>
+            </article>
+          )}
+        </For>
+      </div>
     </>
   );
 }
