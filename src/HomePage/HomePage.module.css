@@ -11,10 +11,6 @@
   max-width: 300px;
 }
 
-.item {
-  margin-bottom: 50px;
-}
-
 .button {
   background-color: black;
   color: white;
@@ -26,7 +22,27 @@
   text-transform: uppercase;
 }
 
+button:has(img) {
+  border: none;
+  cursor: pointer;
+  background-color: white;
+  padding: 0;
+}
+
 .info {
   display: flex;
   justify-content: space-between;
+}
+
+.modal-content {
+  display: flex;
+  gap: 20px;
+}
+
+.modal-content img {
+  max-width: 300px
+}
+
+.modal-price {
+  font-size: 2rem;
 }
