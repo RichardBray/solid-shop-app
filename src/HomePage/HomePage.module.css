@@ -22,16 +22,16 @@
   text-transform: uppercase;
 }
 
+.info {
+  display: flex;
+  justify-content: space-between;
+}
+
 button:has(img) {
   border: none;
   cursor: pointer;
   background-color: white;
   padding: 0;
-}
-
-.info {
-  display: flex;
-  justify-content: space-between;
 }
 
 .modal-content {

@@ -1,4 +1,4 @@
-import { createSignal, For, Show } from 'solid-js';
+import { createSignal, For } from 'solid-js';
 import type { Resource } from 'solid-js';
 
 import type { ShopItem } from '../App';
@@ -48,20 +48,18 @@ export default function HomePage({ items, getButtonText, toggleBought }: HomePag
           )}
         </For>
       </div>
-      <Show when={showModal()}>
-        <Modal closeFn={closeModal}>
-          <section class={styles['modal-content']}>
-            <div>
-              <img src={modalItem().image_url} alt={modalItem().name} />
-            </div>
-            <div>
-              <h3>{modalItem().name}</h3>
-              <p>{modalItem().description}</p>
-              <strong class={styles['modal-price']}>£{modalItem().price}</strong>
-            </div>
-          </section>
-        </Modal>
-      </Show>
+      <Modal closeFn={closeModal} showSignal={showModal}>
+        <section class={styles['modal-content']}>
+          <div>
+            <img src={modalItem().image_url} alt={modalItem().name} />
+          </div>
+          <div>
+            <h3>{modalItem().name}</h3>
+            <p>{modalItem().description}</p>
+            <strong class={styles['modal-price']}>£{modalItem().price}</strong>
+          </div>
+        </section>
+      </Modal>
     </>
   );
 }
