@@ -4,14 +4,14 @@ import type { Resource } from 'solid-js';
 import type { ShopItem } from '../App';
 import styles from './HomePage.module.css';
 import Modal from '../components/Modal/Modal';
+import { addBoughtItem } from '../store';
 
 interface HomePageProps {
   items: Resource<ShopItem[]>;
   getButtonText: () => string;
-  toggleBought: () => void;
 }
 
-export default function HomePage({ items, getButtonText, toggleBought }: HomePageProps) {
+export default function HomePage({ items, getButtonText }: HomePageProps) {
   const [showModal, setShowModal] = createSignal(false);
   const [modalItem, setModalItem] = createSignal<ShopItem>({
     name: '',
@@ -43,7 +43,7 @@ export default function HomePage({ items, getButtonText, toggleBought }: HomePag
                 {item.name}
                 <strong>£{item.price}</strong>
               </section>
-              <button class={styles.button} onClick={toggleBought}>{getButtonText()}</button>
+              <button class={styles.button} onClick={[addBoughtItem, item]}>{getButtonText()}</button>
             </article>
           )}
         </For>

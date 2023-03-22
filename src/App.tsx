@@ -1,6 +1,8 @@
 import HomePage from './HomePage/HomePage';
 import styles from './App.module.css';
 import * as Solid from 'solid-js';
+import { boughtItems } from './store';
+
 
 const { Switch, Match, Suspense } = Solid;
 
@@ -63,7 +65,7 @@ export default function App() {
             Home
           </a>
           <a href="#" {...navButtonProps('checkout')}>
-            Checkout
+            Checkout ({boughtItems.length})
           </a>
           <a href="#" {...navButtonProps('about')}>
             About
