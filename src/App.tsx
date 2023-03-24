@@ -1,8 +1,7 @@
 import HomePage from './HomePage/HomePage';
 import styles from './App.module.css';
 import * as Solid from 'solid-js';
-import { boughtItems } from './store';
-
+import { addItems, boughtItems } from './store';
 
 const { Switch, Match, Suspense } = Solid;
 
@@ -11,7 +10,9 @@ export interface ShopItem {
   price: number;
   description: string;
   image_url: string;
+  bought?: boolean;
 }
+
 type PageName = 'home' | 'checkout' | 'about';
 
 const CheckoutPage = Solid.lazy(async () => {
@@ -20,41 +21,28 @@ const CheckoutPage = Solid.lazy(async () => {
 
 async function fetchData(): Promise<ShopItem[]> {
   const data = await fetch('src/api/data.json');
-  const json = await data.json();
-  return json.items;
+  const json: { items: ShopItem[] } = await data.json();
+  const itemsWithBought: ShopItem[] = json.items.map((item) => ({ ...item, bought: false }));
+
+  return itemsWithBought;
 }
 
 export default function App() {
-  const [bought, setBought] = Solid.createSignal(false);
   const [page, setPage] = Solid.createSignal<PageName>('home');
 
   const [items] = Solid.createResource<ShopItem[]>(fetchData);
-  const getButtonText = () => (bought() ? 'Remove' : 'Buy');
-  const notification = Solid.createMemo(
-    Solid.on(
-      bought,
-      () => {
-        const message = bought() ? 'An item has been bought' : 'No items in the basket';
-        return message;
-      },
-      { defer: true }
-    )
+
+  Solid.createEffect(
+    Solid.on(items, () => {
+      if (items()) addItems(items()!);
+    })
   );
-  const homepageProps = {
-    items,
-    getButtonText,
-    toggleBought,
-  };
 
   function navButtonProps(name: PageName) {
     return {
       onClick: () => setPage(name),
       classList: { [styles.active]: page() === name },
     };
-  }
-
-  function toggleBought() {
-    setBought(!bought());
   }
 
   return (
@@ -65,7 +53,7 @@ export default function App() {
             Home
           </a>
           <a href="#" {...navButtonProps('checkout')}>
-            Checkout ({boughtItems.length})
+            Checkout ({boughtItems().length})
           </a>
           <a href="#" {...navButtonProps('about')}>
             About
@@ -73,11 +61,10 @@ export default function App() {
         </nav>
         <h1>Solid Shop</h1>
       </header>
-      <p>{notification()}</p>
       <Switch fallback={<div>Not Found</div>}>
         <Match when={page() === 'home'}>
           <Suspense fallback={<div>Loading...</div>}>
-            <HomePage {...homepageProps} />
+            <HomePage />
           </Suspense>
         </Match>
         <Match when={page() === 'checkout'}>

@@ -1,23 +1,17 @@
 import { createSignal, For } from 'solid-js';
-import type { Resource } from 'solid-js';
 
 import type { ShopItem } from '../App';
 import styles from './HomePage.module.css';
 import Modal from '../components/Modal/Modal';
-import { addBoughtItem } from '../store';
+import { toggleBoughtItem, items } from '../store';
 
-interface HomePageProps {
-  items: Resource<ShopItem[]>;
-  getButtonText: () => string;
-}
-
-export default function HomePage({ items, getButtonText }: HomePageProps) {
+export default function HomePage() {
   const [showModal, setShowModal] = createSignal(false);
   const [modalItem, setModalItem] = createSignal<ShopItem>({
     name: '',
     price: 0,
     description: '',
-    image_url: ''
+    image_url: '',
   });
 
   function revealModal(item: ShopItem) {
@@ -28,12 +22,11 @@ export default function HomePage({ items, getButtonText }: HomePageProps) {
   function closeModal() {
     setShowModal(false);
   }
-
   return (
     <>
-      <h2>Viewing {items()?.length} Products</h2>
+      <h2>Viewing {items.length} Products</h2>
       <div class={styles.container}>
-        <For each={items()}>
+        <For each={items}>
           {(item) => (
             <article class={styles.item}>
               <button onClick={[revealModal, item]}>
@@ -43,7 +36,9 @@ export default function HomePage({ items, getButtonText }: HomePageProps) {
                 {item.name}
                 <strong>£{item.price}</strong>
               </section>
-              <button class={styles.button} onClick={[addBoughtItem, item]}>{getButtonText()}</button>
+              <button class={styles.button} onClick={[toggleBoughtItem, item]}>
+                {item.bought ? 'Remove' : 'Buy'}
+              </button>
             </article>
           )}
         </For>

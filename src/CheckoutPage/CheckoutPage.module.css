@@ -1,0 +1,52 @@
+.row,
+.container,
+.info {
+  display: flex;
+}
+
+.container {
+  justify-content: space-between;
+}
+
+.row {
+  margin-bottom: 25px;
+  padding-bottom: 25px;
+  justify-content: flex-start;
+  gap: 20px;
+  border-bottom: 1px solid;
+}
+
+.row:last-child {
+  border-bottom: none;
+}
+
+.row img {
+  max-width: 250px;
+}
+
+.price,
+.total h3 {
+  font-size: 2rem;
+}
+
+.info {
+  flex-direction: column;
+}
+
+.button-container {
+  margin-top: 1rem;
+}
+
+.total {
+  border: 1px solid;
+  padding: 1rem;
+  text-align: right;
+}
+
+.total h3 {
+  margin: 0;
+}
+
+.total span {
+  font-size: 3rem;
+}
