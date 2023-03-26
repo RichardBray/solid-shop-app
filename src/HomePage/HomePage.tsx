@@ -3,7 +3,7 @@ import { createSignal, For } from 'solid-js';
 import type { ShopItem } from '../App';
 import styles from './HomePage.module.css';
 import Modal from '../components/Modal/Modal';
-import { toggleBoughtItem, items } from '../store';
+import { useShopContext } from '../context';
 
 export default function HomePage() {
   const [showModal, setShowModal] = createSignal(false);
@@ -13,6 +13,7 @@ export default function HomePage() {
     description: '',
     image_url: '',
   });
+  const { items, toggleBoughtItem } = useShopContext()!;
 
   function revealModal(item: ShopItem) {
     setModalItem(item);

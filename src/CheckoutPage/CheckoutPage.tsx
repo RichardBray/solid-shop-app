@@ -1,10 +1,12 @@
 import { For } from 'solid-js';
 import { ShopItem } from '../App';
-import { boughtItems, toggleBoughtItem } from '../store';
+import { useShopContext } from '../context';
 import styles from './CheckoutPage.module.css';
 import homePageStyles from '../HomePage/HomePage.module.css';
 
 export default function CheckoutPage() {
+  const { toggleBoughtItem, boughtItems } = useShopContext()!;
+
   function calculateTotal(items: ShopItem[]) {
     const total = items.reduce((acc, curr) => acc + curr.price, 0);
     return total.toFixed(2);

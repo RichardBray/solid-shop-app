@@ -1,7 +1,7 @@
 import HomePage from './HomePage/HomePage';
 import styles from './App.module.css';
 import * as Solid from 'solid-js';
-import { addItems, boughtItems } from './store';
+import { useShopContext } from './context';
 
 const { Switch, Match, Suspense } = Solid;
 
@@ -29,6 +29,7 @@ async function fetchData(): Promise<ShopItem[]> {
 
 export default function App() {
   const [page, setPage] = Solid.createSignal<PageName>('home');
+  const { addItems, boughtItems } = useShopContext()!;
 
   const [items] = Solid.createResource<ShopItem[]>(fetchData);
 
