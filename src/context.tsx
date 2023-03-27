@@ -1,20 +1,20 @@
-import { createSignal, createContext, useContext, JSXElement } from 'solid-js';
+import { createContext, useContext, JSXElement } from 'solid-js';
 import { createStore, unwrap } from 'solid-js/store';
-import type { Accessor } from 'solid-js';
 import type { ShopItem } from './App';
 
-interface ContextValues {
-  addItems: (items: ShopItem[]) => void;
-  boughtItems: Accessor<ShopItem[]>;
-  toggleBoughtItem: (item: ShopItem) => void;
-  items: ShopItem[];
-}
+type ContextValues = [
+  { items: ShopItem[]; boughtItems: ShopItem[] },
+  {
+    addItems: (items: ShopItem[]) => void;
+    toggleBoughtItem: (item: ShopItem) => void;
+  }
+];
 
 const ShopContext = createContext<ContextValues>();
 
 export function ShopProvider(props: { children: JSXElement }) {
   const [items, setItems] = createStore<ShopItem[]>([]);
-  const [boughtItems, setBoughtItems] = createSignal<ShopItem[]>([]);
+  const [boughtItems, setBoughtItems] = createStore<ShopItem[]>([]);
   const { Provider } = ShopContext;
 
   function addItems(items: ShopItem[]) {
@@ -40,7 +40,10 @@ export function ShopProvider(props: { children: JSXElement }) {
     return items.filter((item) => item.bought);
   }
 
-  const providerValues = { addItems, boughtItems, toggleBoughtItem, items };
+  const providerValues: ContextValues = [
+    { items, boughtItems },
+    { addItems, toggleBoughtItem },
+  ];
 
   return <Provider value={providerValues}>{props.children}</Provider>;
 }
