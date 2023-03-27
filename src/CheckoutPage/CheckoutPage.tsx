@@ -5,7 +5,7 @@ import styles from './CheckoutPage.module.css';
 import homePageStyles from '../HomePage/HomePage.module.css';
 
 export default function CheckoutPage() {
-  const { toggleBoughtItem, boughtItems } = useShopContext()!;
+  const [{ boughtItems }, { toggleBoughtItem }] = useShopContext()!;
 
   function calculateTotal(items: ShopItem[]) {
     const total = items.reduce((acc, curr) => acc + curr.price, 0);
@@ -13,10 +13,10 @@ export default function CheckoutPage() {
   }
   return (
     <>
-      <h2>You have {boughtItems().length} products checked out</h2>
+      <h2>You have {boughtItems.length} products checked out</h2>
       <div class={styles.container}>
         <section>
-          <For each={boughtItems()}>
+          <For each={boughtItems}>
             {(item) => (
               <article class={styles.row}>
                 <img src={item.image_url} alt={item.name} />
@@ -37,7 +37,7 @@ export default function CheckoutPage() {
         <section>
           <div class={styles.total}>
             <h3>Total</h3>
-            <span>£{calculateTotal(boughtItems())}</span>
+            <span>£{calculateTotal(boughtItems)}</span>
           </div>
         </section>
       </div>

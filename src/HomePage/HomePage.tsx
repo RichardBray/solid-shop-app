@@ -13,7 +13,7 @@ export default function HomePage() {
     description: '',
     image_url: '',
   });
-  const { items, toggleBoughtItem } = useShopContext()!;
+  const [{ items }, { toggleBoughtItem }] = useShopContext()!;
 
   function revealModal(item: ShopItem) {
     setModalItem(item);

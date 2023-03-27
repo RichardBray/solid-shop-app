@@ -29,7 +29,7 @@ async function fetchData(): Promise<ShopItem[]> {
 
 export default function App() {
   const [page, setPage] = Solid.createSignal<PageName>('home');
-  const { addItems, boughtItems } = useShopContext()!;
+  const [{ boughtItems }, { addItems }] = useShopContext()!;
 
   const [items] = Solid.createResource<ShopItem[]>(fetchData);
 
@@ -54,7 +54,7 @@ export default function App() {
             Home
           </a>
           <a href="#" {...navButtonProps('checkout')}>
-            Checkout ({boughtItems().length})
+            Checkout ({boughtItems.length})
           </a>
           <a href="#" {...navButtonProps('about')}>
             About
